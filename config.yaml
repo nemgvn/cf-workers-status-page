@@ -1,28 +1,33 @@
 settings:
-  title: 'Status Page'
-  url: 'https://status-page.eidam.dev' # used for Slack messages
-  logo: logo-192x192.png # image in ./public/ folder
-  daysInHistogram: 90 # number of days you want to display in histogram
-  collectResponseTimes: true # collects avg response times from CRON locations
+  title: 'NemG Status'
+  url: 'https://status.nemg.workers.dev'           # Dùng cho các thông báo (Slack, Discord)
+  logo: logo-192x192.png                          # Logo nằm trong thư mục ./public/
+  daysInHistogram: 90                             # Số ngày hiển thị trong biểu đồ
+  collectResponseTimes: true                      # Thu thập thời gian phản hồi trung bình từ các vị trí CRON
 
+  # Thông điệp trạng thái hệ thống
   allmonitorsOperational: 'All Systems Operational'
   notAllmonitorsOperational: 'Not All Systems Operational'
+
+  # Nhãn trạng thái của từng monitor
   monitorLabelOperational: 'Operational'
   monitorLabelNotOperational: 'Not Operational'
   monitorLabelNoData: 'No data'
+
+  # Nhãn hiển thị cho từng ngày trong biểu đồ
   dayInHistogramNoData: 'No data'
   dayInHistogramOperational: 'All good'
-  dayInHistogramNotOperational: ' incident(s)' # xx incident(s) recorded
+  dayInHistogramNotOperational: ' incident(s)'     # VD: "2 incident(s) recorded"
 
 monitors:
-  - id: workers-cloudflare-com # unique identifier
-    name: workers.cloudflare.com
-    description: 'You write code. They handle the rest.' # default=empty
-    url: 'https://workers.cloudflare.com/' # URL to fetch
-    method: GET # default=GET
-    expectStatus: 200 # operational status, default=200
-    followRedirect: false # should fetch follow redirects, default=false
-    linkable: false # allows the title to be a link, default=true
+  - id: nemg.me                    # ID duy nhất, viết liền-không-dấu
+    name: nemg.me
+    description: 'Profile NemG.'
+    url: 'https://nemg.me/'
+    method: GET
+    expectStatus: 200
+    followRedirect: false
+    linkable: false
 
   - id: www-cloudflare-com
     name: www.cloudflare.com
@@ -30,7 +35,7 @@ monitors:
     url: 'https://www.cloudflare.com'
     method: GET
     expectStatus: 200
-    linkable: true # allows the title to be a link, default=true
+    linkable: true
 
   - id: blog-cloudflare-com
     name: The Cloudflare Blog
