@@ -1,6 +1,6 @@
 # wrangler.toml
 name = "status"
-account_id = "YOUR_CLOUDFLARE_ACCOUNT_ID"     # ← Điền Account ID của bạn
+account_id = "nthe0241@gmail.com"     # ← Điền Account ID của bạn
 workers_dev = true
 
 type = "webpack"
