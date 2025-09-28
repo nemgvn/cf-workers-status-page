@@ -1,19 +1,28 @@
-name = "cf-workers-status-page"
-workers_dev = true
-account_id = ""
-type = "webpack"
-webpack_config = "node_modules/flareact/webpack"
-compatibility_date = "2021-07-23"
+name = "cf-workers-status-page"              # Tên Worker
+account_id = "YOUR_CLOUDFLARE_ACCOUNT_ID"     # <-- điền Account ID của bạn
+workers_dev = true                            # true = chạy trên *.workers.dev
 
-[triggers]
-crons = ["* * * * *"]
+type = "webpack"                             # Dùng Webpack (Flareact cần)
+webpack_config = "node_modules/flareact/webpack"
+
+# Luôn nên update compatibility_date mới nhất
+compatibility_date = "2023-09-28"
 
 [site]
-bucket = "out"
+bucket = "out"                               # Flareact build ra thư mục out
 entry-point = "./"
 
-# uncomment and adjust following if you are not using GitHub Actions
-#[env.production]
-#kv-namespaces = [{binding="KV_STATUS_PAGE", id="xxxx", preview_id=""}]
-#zone_id="xxx"
-#route="xxx"
+[triggers]
+# CRON job (nên để mỗi 5 phút thay vì mỗi phút để tránh spam)
+crons = ["*/5 * * * *"]
+
+[env.production]
+# KV Namespace cho status page (tạo bằng wrangler kv:namespace create "KV_STATUS_PAGE")
+kv-namespaces = [
+  { binding = "nemg", id = "nemg", preview_id = "nemg" }
+]
+
+# Nếu bạn muốn gán domain riêng cho Worker:
+# (bỏ comment và sửa cho đúng)
+#zone_id = "YOUR_ZONE_ID"
+#route = "status.yourdomain.com/*"
